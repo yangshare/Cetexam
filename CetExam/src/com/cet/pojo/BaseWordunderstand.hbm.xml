@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.cet.pojo.BaseWordunderstand" table="base_wordunderstand" catalog="cetexam">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="native" />
+        </id>
+        <property name="essay" type="java.lang.String">
+            <column name="essay" length="65535" not-null="true" />
+        </property>
+        <property name="option" type="java.lang.String">
+            <column name="option" length="65535" not-null="true" />
+        </property>
+        <property name="answer" type="java.lang.String">
+            <column name="answer" length="30" not-null="true" />
+        </property>
+        <property name="difficulty" type="java.lang.Float">
+            <column name="difficulty" precision="4" scale="3" />
+        </property>
+        <property name="access" type="java.lang.Float">
+            <column name="access" precision="7" scale="1" />
+        </property>
+        <property name="total" type="java.lang.Integer">
+            <column name="total" />
+        </property>
+    </class>
+</hibernate-mapping>

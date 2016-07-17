@@ -1,0 +1,219 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<!-- 指定Web应用的默认编码集,相当于调用HttpServletRequest的setCharacterEncoding方法 -->
+	<constant name="struts.i18n.encoding" value="UTF-8" />
+
+	<!--
+		该属性指定需要Struts 2处理的请求后缀，该属性的默认值是action，即所有匹配*.action的请求都由Struts2处理。
+		如果用户需要指定多个请求后缀，则多个后缀之间以英文逗号（,）隔开。
+	-->
+	<constant name="struts.action.extension" value="action," />
+
+	<!-- 设置浏览器是否缓存静态内容,默认值为true(生产环境下使用),开发阶段最好关闭 -->
+	<constant name="struts.serve.static.browserCache" value="false" />
+
+	<!-- 当struts的配置文件修改后,系统是否自动重新加载该文件,默认值为false(生产环境下使用),开发阶段最好打开 -->
+	<constant name="struts.configuration.xml.reload" value="true" />
+
+	<!-- 开发模式下使用,这样可以打印出更详细的错误信息 -->
+	<constant name="struts.devMode" value="false" />
+
+	<!-- 默认的视图主题  -->
+	<constant name="struts.ui.theme" value="simple" />
+
+	<!-- 这句说明 action对象有Spring负责创建（struts与spring集成的关键配置） -->
+	<constant name="struts.objectFactory" value="spring" />
+
+	<!-- 配置上传文件的最大值 -->
+	<constant name="struts.multipart.maxSize" value="41943040" />
+
+	<package name="cetexam"  extends="struts-default">
+
+		<!-- 试题类 -->
+		<action name="Exam_*" class="com.cet.action.ExamAction" method="{1}">
+			<result name="success">/index.jsp</result>
+			<result name="error">/examInsert.jsp</result>
+		</action>
+
+		<!-- 考生类 -->
+		<action name="Examinee_*" class="com.cet.action.ExamineeAction"
+			method="{1}">
+			<result name="login_false">/login.jsp</result>
+			<result name="index" type="chain">Examinee_toIndex</result>
+			<result name="showgrade">/showGrade.jsp</result>
+			<result name="realindex">/index.jsp</result>
+		</action>
+
+		<!-- 考试类 -->
+		<action name="Test_*" class="com.cet.action.TestAction" method="{1}">
+			<result name="testing">/testPage.jsp</result>
+			<result name="index" type="chain">Examinee_toIndex</result>
+			<result name="exerciselist" type="chain">Test_pagingExercise</result>
+			<result name="realexerciselist">/exerciseList.jsp</result>
+		</action>
+
+		<!--
+			*********************************************************************************
+			START 老杨添加action
+			*********************************************************************************
+		-->
+
+		<!-- 试题页面 -->
+		<action name="test_*" class="com.cet.action.TestAction_partI"
+			method="{1}">
+			<result name="getpartI">/WEB-INF/page/test/partI.jsp</result>
+			<!--
+				test_getpartII
+			-->
+			<result name="getpartII">/WEB-INF/page/test/partII.jsp</result>
+			<result name="back" type="chain">examinee_getexaminee</result>
+		</action>
+
+		<!-- 修改试题 -->
+		<action name="updateTest-*" class="com.cet.action.UpdateTestAction"
+			method="{1}">
+			<result name="execute">/WEB-INF/page/admin/testlist.jsp</result>
+			<result name="getTest">/WEB-INF/page/admin/testdetail.jsp</result>
+			<result name="updateAllTests">/WEB-INF/page/admin/testUpdateList.jsp</result>
+			<result name="deleteAllTests">/WEB-INF/page/admin/testDeleteList.jsp</result>
+			<result name="updateTest">/WEB-INF/page/admin/updateTest.jsp</result>
+			<result name="addTest">/WEB-INF/page/admin/addTest.jsp</result>
+			<result name="delete" type="chain">teacherAction-linkDeleteTeacher
+			</result>
+			<result name="update" type="chain">teacherAction-linkUpdateTeacherPage
+			</result>
+			<result name="successDel" type="chain">updateTest-detectAllTests
+			</result>
+			<result name="successAdd" type="chain">updateTest-addTest</result>
+			<result name="success" type="chain">updateTest-updateTest</result>
+			<interceptor-ref name="fileUpload" />
+			<interceptor-ref name="defaultStack" />
+		</action>
+
+		<!-- 考生信息确认 -->
+		<action name="examinee_*" class="com.cet.action.ExamineeAction"
+			method="{1}">
+			<result name="getexaminee">/WEB-INF/page/examinee/querenmessage.jsp</result>
+			<result type="chain">examinee_getexaminee</result>
+			<result name="back" type="dispatcher">/index.jsp</result>
+			<result name="getgrades">/WEB-INF/page/examinee/getgrades.jsp</result>
+			<result type="chain">examinee_getgrades</result>
+		</action>
+
+		<!-- 客观题评分 -->
+		<action name="grade_*" class="com.cet.action.TestAction_partII"
+			method="{1}">
+			<result name="givegrade" type="dispatcher">/index.jsp</result><!-- 未完成 -->
+		</action>
+
+		<!-- 主观题评分 -->
+		<action name="needmark_*" class="com.cet.action.NeedmarkingAction"
+			method="{1}">
+			<result name="list">/WEB-INF/page/teacher/needmarkinglist.jsp
+			</result>
+			<result type="chain">needmark_list</result>
+			<result name="currect">/WEB-INF/page/teacher/needmarkingcurrect.jsp
+			</result>
+			<result type="chain">needmark_currect</result>
+			<result name="grade">/WEB-INF/page/teacher/needmarkinglist.jsp
+			</result>
+
+		</action>
+		<!-- 教师登录密码修改 -->
+		<action name="updatepwd_*" class="com.cet.action.UpdateTeacherPwdAction"
+			method="{1}">
+			<result name="currectpwd">/WEB-INF/page/teacher/currectpassword.jsp
+			</result>
+			<result name="currectpassword">/WEB-INF/page/teacher/currectpassword.jsp
+			</result>
+			<result type="chain">updatepwd_currectpassword</result>
+		</action>
+		<!-- wu~~ -->
+
+		<!-- 后台登录 -->
+		<action name="loginAction" class="com.cet.action.LoginAction">
+			<result name="teacher">/teacher.jsp</result>
+			<result name="admin">/admin.jsp</result>
+			<result name="fail" type="dispatcher">/adminLogin.jsp</result>
+		</action>
+		<!-- 后台登录 -->
+
+		<!-- 教师对象的增删改 -->
+		<action name="teacherAction-*" class="com.cet.action.TeacherAction"
+			method="{1}">
+			<result>/WEB-INF/page/admin/addTeacher.jsp</result>
+			<result name="tleft">/tleft.jsp</result>
+			<result name="updateTeacherPage">/WEB-INF/page/admin/updateTeacherPage.jsp
+			</result>
+			<result name="deleteTeacher">/WEB-INF/page/admin/deleteTeacher.jsp</result>
+			<result name="execute">/WEB-INF/page/admin/teacherlist.jsp</result>
+			<result name="delete" type="chain">teacherAction-linkDeleteTeacher
+			</result>
+			<result name="update" type="chain">teacherAction-linkUpdateTeacherPage
+			</result>
+			<result name="add" type="chain">teacherAction</result>
+			<result name="getTeacherById">/WEB-INF/page/admin/updateTeacher.jsp</result>
+			<!-- yan -->
+
+			<result name="currectpassword">/WEB-INF/page/teacher/currectpassword.jsp
+			</result>
+			<result type="chain" name="currectpwd">teacherAction-currectpassword
+			</result>
+
+			<!-- yan -->
+			<interceptor-ref name="fileUpload" />
+			<interceptor-ref name="defaultStack" />
+		</action>
+
+		<!-- 学生对象的增删改 -->
+		<action name="examineeAction-*" class="com.cet.action.ExamineeAction"
+			method="{1}">
+			<result>/WEB-INF/page/admin/addExaminee.jsp</result>
+			<result name="updateExamineePage">/WEB-INF/page/admin/updateExamineePage.jsp
+			</result>
+			<result name="deleteExaminee">/WEB-INF/page/admin/deleteExaminee.jsp</result>
+			<result name="execute">/WEB-INF/page/admin/examineelist.jsp</result>
+			<result name="result">/WEB-INF/page/admin/result.jsp</result>
+			<result name="delete" type="chain">examineeAction-linkDeleteExaminee
+			</result>
+			<result name="update" type="chain">examineeAction-linkUpdateExamineePage
+			</result>
+			<result name="add" type="chain">examineeAction</result>
+			<result name="getExamineeByCandidateNo">/WEB-INF/page/admin/updateExaminee.jsp</result>
+			<interceptor-ref name="fileUpload" />
+			<interceptor-ref name="defaultStack" />
+		</action>
+
+		<!-- 考试对象的增删改 -->
+		<action name="examAction-*" class="com.cet.action.TestAction"
+			method="{1}">
+			<result name="success">/WEB-INF/page/admin/addExams.jsp</result>
+			<result name="updateExamPage">/WEB-INF/page/admin/updateExamPage.jsp</result>
+			<result name="deleteExam">/WEB-INF/page/admin/deleteExam.jsp</result>
+			<result name="execute">/WEB-INF/page/admin/examsList.jsp</result>
+			<result name="delete" type="chain">examAction-linkDeleteExam</result>
+			<result name="update" type="chain">examAction-linkUpdateExamPage
+			</result>
+			<result name="add" type="chain">examAction</result>
+			<result name="getExamById">/WEB-INF/page/admin/updateExam.jsp</result>
+		</action>
+
+		<!--
+			*********************************************************************************
+			END 老杨添加action
+			*********************************************************************************
+		-->
+
+	</package>
+
+	<package name="default" extends="struts-default">
+		<default-action-ref name="notFound" />
+		<action name="notFound">
+			<result>/404.jsp</result>
+		</action>
+	</package>
+
+</struts>

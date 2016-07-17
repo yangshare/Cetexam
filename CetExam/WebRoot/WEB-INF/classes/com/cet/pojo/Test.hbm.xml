@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.cet.pojo.Test" table="test" catalog="cetexam">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="baseLongreading" class="com.cet.pojo.BaseLongreading" fetch="select" lazy="false" >
+            <column name="longreading" not-null="true" />
+        </many-to-one>
+        <many-to-one name="baseTranslate" class="com.cet.pojo.BaseTranslate" fetch="select" lazy="false">
+            <column name="translate" not-null="true" />
+        </many-to-one>
+        <many-to-one name="baseListening" class="com.cet.pojo.BaseListening" fetch="select" lazy="false">
+            <column name="listening" not-null="true" />
+        </many-to-one>
+        <many-to-one name="baseCarereading1" class="com.cet.pojo.BaseCarereading" fetch="select" lazy="false">
+            <column name="carereading1" not-null="true" />
+        </many-to-one>
+        <many-to-one name="baseWordunderstand" class="com.cet.pojo.BaseWordunderstand" fetch="select" lazy="false">
+            <column name="wordunderstand" not-null="true" />
+        </many-to-one>
+        <many-to-one name="baseWriting" class="com.cet.pojo.BaseWriting" fetch="select" lazy="false">
+            <column name="writing" not-null="true" />
+        </many-to-one>
+        <many-to-one name="baseCarereading2" class="com.cet.pojo.BaseCarereading" fetch="select" lazy="false">
+            <column name="carereading2" not-null="true" />
+        </many-to-one>
+        <property name="name" type="java.lang.String">
+            <column name="name" length="50" not-null="true" />
+        </property>
+        
+        <!--property-ref:指定关联类(Exam)的属性名，这个属性将会和本类(Test)的主键相对应。如果没有指定，会使用关联类(Exam)的主键与之对应。
+	        property-ref，不是数据库表中的字段名,而是定义的java类中的属性名,一定要注意。
+        <one-to-one name="exam" class="com.cet.pojo.Exam" property-ref="test"></one-to-one>-->
+    </class>
+</hibernate-mapping>

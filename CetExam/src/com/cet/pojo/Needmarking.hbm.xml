@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.cet.pojo.Needmarking" table="needmarking" catalog="cetexam">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="native" />
+        </id>
+        <many-to-one name="examinee" class="com.cet.pojo.Examinee" fetch="select" lazy="false">
+            <column name="candidate" length="20" not-null="true"/>
+        </many-to-one>
+        <many-to-one name="test" class="com.cet.pojo.Test" fetch="select" lazy="false">
+            <column name="testid" not-null="true"/>
+        </many-to-one>
+        <property name="writingAnswer" type="java.lang.String">
+            <column name="writing_answer" length="65535" />
+        </property>
+        <property name="translateAnswer" type="java.lang.String">
+            <column name="translate_answer" length="65535" />
+        </property>
+        <property name="status" type="java.lang.String">
+            <column name="status" length="2" />
+        </property>
+        <property name="time" type="java.lang.String">
+            <column name="time" length="20" />
+        </property>
+        <property name="writinggrade" type="java.lang.Double">
+            <column name="writinggrade" precision="4" scale="1" />
+        </property>
+        <property name="listeninggrade" type="java.lang.Double">
+            <column name="listeninggrade" precision="4" scale="1" />
+        </property>
+        <property name="readinggrade" type="java.lang.Double">
+            <column name="readinggrade" precision="4" scale="1" />
+        </property>
+        <property name="translategrade" type="java.lang.Double">
+            <column name="translategrade" precision="4" scale="1" />
+        </property>
+        <property name="totalgrade" type="java.lang.Double">
+            <column name="totalgrade" precision="4" scale="1" />
+        </property>
+    </class>
+</hibernate-mapping>

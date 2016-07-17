@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.cet.pojo.Teacher" table="teacher" catalog="cetexam">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="native" />
+        </id>
+        <property name="teachername" type="java.lang.String">
+            <column name="teachername" length="10" not-null="true" />
+        </property>
+        <property name="password" type="java.lang.String">
+            <column name="password" length="20" not-null="true" />
+        </property>
+        <property name="school" type="java.lang.String">
+            <column name="school" length="20" not-null="true" />
+        </property>
+        <property name="image" type="java.lang.String">
+            <column name="image" length="100" />
+        </property>
+        <property name="email" type="java.lang.String">
+            <column name="email" length="20" />
+        </property>
+    </class>
+</hibernate-mapping>

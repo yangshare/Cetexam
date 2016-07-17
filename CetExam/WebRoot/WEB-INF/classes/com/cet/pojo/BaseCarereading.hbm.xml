@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.cet.pojo.BaseCarereading" table="base_carereading" catalog="cetexam">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="native" />
+        </id>
+        <property name="essay" type="java.lang.String">
+            <column name="essay" length="65535" not-null="true" />
+        </property>
+        <property name="difficulty" type="java.lang.Float">
+            <column name="difficulty" precision="4" scale="3" />
+        </property>
+        <property name="access" type="java.lang.Float">
+            <column name="access" precision="7" scale="1" />
+        </property>
+        <property name="total" type="java.lang.Integer">
+            <column name="total" />
+        </property>
+        <set name="seedCarereadings" inverse="true" lazy="false" order-by="id">
+            <key>
+                <column name="praxisid" not-null="true" />
+            </key>
+            <one-to-many class="com.cet.pojo.SeedCarereading" />
+        </set>
+    </class>
+</hibernate-mapping>
