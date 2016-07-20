@@ -57,7 +57,7 @@
 
 		<!--
 			*********************************************************************************
-			START 老杨添加action
+			START 老杨添加的action
 			*********************************************************************************
 		-->
 
@@ -146,9 +146,6 @@
 			method="{1}">
 			<result>/WEB-INF/page/admin/addTeacher.jsp</result>
 			<result name="tleft">/tleft.jsp</result>
-			<result name="updateTeacherPage">/WEB-INF/page/admin/updateTeacherPage.jsp
-			</result>
-			<result name="deleteTeacher">/WEB-INF/page/admin/deleteTeacher.jsp</result>
 			<result name="execute">/WEB-INF/page/admin/teacherlist.jsp</result>
 			<result name="delete" type="chain">teacherAction-linkDeleteTeacher
 			</result>
@@ -169,19 +166,16 @@
 		</action>
 
 		<!-- 学生对象的增删改 -->
-		<action name="examineeAction-*" class="com.cet.action.ExamineeAction"
+		<action name="examineeAction-*" class="com.cet.action.BackExamineeAction"
 			method="{1}">
 			<result>/WEB-INF/page/admin/addExaminee.jsp</result>
-			<result name="updateExamineePage">/WEB-INF/page/admin/updateExamineePage.jsp
-			</result>
-			<result name="deleteExaminee">/WEB-INF/page/admin/deleteExaminee.jsp</result>
 			<result name="execute">/WEB-INF/page/admin/examineelist.jsp</result>
 			<result name="result">/WEB-INF/page/admin/result.jsp</result>
 			<result name="delete" type="chain">examineeAction-linkDeleteExaminee
 			</result>
 			<result name="update" type="chain">examineeAction-linkUpdateExamineePage
 			</result>
-			<result name="add" type="chain">examineeAction</result>
+			<result name="add" type="chain">examineeAction-linkUpdateExamineePage</result>
 			<result name="getExamineeByCandidateNo">/WEB-INF/page/admin/updateExaminee.jsp</result>
 			<interceptor-ref name="fileUpload" />
 			<interceptor-ref name="defaultStack" />
@@ -203,7 +197,7 @@
 
 		<!--
 			*********************************************************************************
-			END 老杨添加action
+			END 老杨添加的action
 			*********************************************************************************
 		-->
 

@@ -62,26 +62,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   			updateExaminee.examineeImage.focus();
   			return false;
   		}
-  		if(updateExaminee.writingGrade.value=="")
-  		{
-  			updateExaminee.writingGrade.value="0";
-  		}
-  		if(updateExaminee.listeningGrade.value=="")
-  		{
-  			updateExaminee.listeningGrade.value="0";
-  		}
-  		if(updateExaminee.readingGrade.value=="")
-  		{
-  			updateExaminee.readingGrade.value="0";
-  		}
-  		if(updateExaminee.comprehensivingGrade.value=="")
-  		{
-  			updateExaminee.comprehensivingGrade.value="0";
-  		}
-  		if(updateExaminee.total.value=="")
-  		{
-  			updateExaminee.total.value="0";
-  		}
+  		
   		var fileName = updateExaminee.examineeImage.value;
   		var i = fileName.lastIndexOf(".");
   		var name = fileName.substring(i);
@@ -104,11 +85,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	<table>
     		<tr>
     			<td width="80px"><font size="4">考号：</font></td>
-    			<td><input name="candidateNo" value="${examinee.candidateNo}" readonly="readonly" class="txtid"/></td>
+    			<td><input name="candidateNo" value="${examinee.candidate}" readonly="readonly" class="txtid"/></td>
     		</tr>
     		<tr>
     			<td><font size="4">姓名：</font></td>
     			<td><input name="name" value="${examinee.name }"/></td>
+    		</tr>
+    		<tr>
+    			<td><font size="4">密码：</font></td>
+    			<td><input name="password" value="${examinee.password }"/></td>
+    		</tr>
+    		<tr>
+    			<td><font size="4">邮箱：</font></td>
+    			<td><input name="email" value="${examinee.email }"/></td>
     		</tr>
     		<tr>
     			<td><font size="4">性别：</font></td>
@@ -125,7 +114,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     		</tr>
     		<tr>
     			<td><font size="4">学校：</font></td>
-    			<td><input name="examineeOfSchool" value="${examinee.examineeOfSchool }"/></td>
+    			<td><input name="examineeOfSchool" value="${examinee.school }"/></td>
     		</tr>
     		<tr>
     			<td valign="top"><font size="4">相片：</font></td>
@@ -137,26 +126,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     					<input type="button" value="浏览..." class="btn"/>
     				</div>
     			</td>
-    		</tr>
-    		<tr>
-    			<td><font size="4">写作：</font></td>
-    			<td><input name="writingGrade" value="${examinee.writingGrade }"/></td>
-    		</tr>
-    		<tr>
-    			<td><font size="4">听力：</font></td>
-    			<td><input name="listeningGrade" value="${examinee.listeningGrade }"/></td>
-    		</tr>
-    		<tr>
-    			<td><font size="4">阅读：</font></td>
-    			<td><input name="readingGrade" value="${examinee.readingGrade }"/></td>
-    		</tr>
-    		<tr>
-    			<td><font size="4">综合：</font></td>
-    			<td><input name="comprehensivingGrade" value="${examinee.comprehensivingGrade }"/></td>
-    		</tr>
-    		<tr>
-    			<td><font size="4">总分：</font></td>
-    			<td><input name="total" value="${examinee.total }"/></td>
     		</tr>
     		<tr>
     			<td></td>

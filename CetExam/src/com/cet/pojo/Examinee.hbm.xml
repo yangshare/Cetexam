@@ -6,7 +6,7 @@
     <class name="com.cet.pojo.Examinee" table="examinee" catalog="cetexam">
         <id name="candidate" type="java.lang.String">
             <column name="candidate" length="20" />
-            <generator class="native" />
+          
         </id>
         <property name="name" type="java.lang.String">
             <column name="name" length="8" not-null="true" />

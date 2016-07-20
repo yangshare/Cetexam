@@ -110,6 +110,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     			<td><input name="name"/></td>
     		</tr>
     		<tr>
+    			<td><font size="4">密码：</font></td>
+    			<td><input name="password"/></td>
+    		</tr>
+    		<tr>
+    			<td><font size="4">邮箱：</font></td>
+    			<td><input name="email"/></td>
+    		</tr>
+    		<tr>
     			<td><font size="4">性别：</font></td>
     			<td><select name="sex"><option>男</option><option>女</option></select></td>
     		</tr>
@@ -125,11 +133,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     					<input type="file" class="file" name="image" onchange="document.getElementById('textfield').value=this.value"/>
     					<input type="button" value="浏览..." class="btn"/>
     				</div>
-    				<input type="hidden" name="writingGrade"/>
-    				<input type="hidden" name="listeningGrade"/>
-    				<input type="hidden" name="readingGrade"/>
-    				<input type="hidden" name="comprehensivingGrade"/>
-    				<input type="hidden" name="total"/>
+    			
     			</td>
     		</tr>
     		<tr>

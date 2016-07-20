@@ -11,7 +11,7 @@ public class Examinee implements java.io.Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	// Fields
-	private String candidate;
+	private String candidate;//学号
 	private String name;
 	private String password;
 	private String sex;

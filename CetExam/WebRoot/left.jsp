@@ -59,18 +59,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <div id="nav">
 	 	<h3>教师管理</h3>
 	    <div>
-	     	<a href="<%=request.getContextPath() %>/cet4/teacherAction?curPage=1" target="showAdmin">●查询教师</a>
+	     	<a href="<%=request.getContextPath() %>/cet4/teacherAction?curPage=1" target="showAdmin">●管理教师</a>
 	     	<a href="<%=request.getContextPath() %>/cet4/teacherAction-link" target="showAdmin">●添加教师</a>
-	     	<a href="<%=request.getContextPath() %>/cet4/teacherAction-linkUpdateTeacherPage?curPage=1" target="showAdmin">●修改教师</a>
-	     	<a href="<%=request.getContextPath() %>/cet4/teacherAction-linkDeleteTeacher?curPage=1" target="showAdmin">●删除教师</a>
 	    </div>
 	    <h3>考生管理</h3>
 	    <div>
-	     	<a href="<%=request.getContextPath() %>/cet4/examineeAction?curPage=1" target="showAdmin">●查询考生</a>
-	     	<a href="<%=request.getContextPath() %>/cet4/examineeAction-result?curPage=1" target="showAdmin">●查询成绩</a>
+	     	<a href="<%=request.getContextPath() %>/cet4/examineeAction?curPage=1" target="showAdmin">●管理考生</a>
 	        <a href="<%=request.getContextPath() %>/cet4/examineeAction-link" target="showAdmin">●添加考生</a>
-	        <a href="<%=request.getContextPath() %>/cet4/examineeAction-linkUpdateExamineePage?curPage=1" target="showAdmin">●修改信息</a>
-	        <a href="<%=request.getContextPath() %>/cet4/examineeAction-linkDeleteExaminee?curPage=1" target="showAdmin">●删除考生</a>
 	    </div>
 	    <h3>试题管理</h3>
 	    <div>

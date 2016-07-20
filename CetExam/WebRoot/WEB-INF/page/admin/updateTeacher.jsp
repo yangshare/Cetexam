@@ -81,7 +81,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     		</tr>
     		<tr>
     			<td><font size="4">姓名：</font></td>
-    			<td><input name="teacherName" value="${teacher.teacherName }"/></td>
+    			<td><input name="teacherName" value="${teacher.teachername }"/></td>
     		</tr>
     		<tr>
     			<td><font size="4">密码：</font></td>
@@ -89,14 +89,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     		</tr>
     		<tr>
     			<td><font size="4">学校：</font></td>
-    			<td><input name="teacherOfSchool" value="${teacher.teacherOfSchool }"/></td>
+    			<td><input name="teacherOfSchool" value="${teacher.school }"/></td>
     		</tr>
     		<tr>
     			<td valign="top"><font size="4">相片：</font></td>
     			<td>
-    				<img src="${teacher.teacherImage }" width="150px" height="200px">
+    				<img src="${teacher.image }" width="150px" height="200px">
     				<div class="file-box">
-    					<input name="teacherImage" id="textfield" value="${teacher.teacherImage }" class="txt"/>
+    					<input name="teacherImage" id="textfield" value="${teacher.image }" class="txt"/>
     					<input type="file" class="file" name="image" onchange="document.getElementById('textfield').value=this.value"/>
     					<input type="button" value="浏览..." class="btn"/>
     				</div>

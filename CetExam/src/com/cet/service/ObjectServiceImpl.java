@@ -107,7 +107,6 @@ public class ObjectServiceImpl implements ObjectService {
 		String hql = null;
 		if (type.equals("管理员")) {
 			hql = "from Admin where name = ? and password = ?";
-			System.out.println("信息：用户名="+username+",密码="+password);
 		}else{
 			if (type.equals("教师")) {
 				hql = "from Teacher where teacherName = ? and password = ?";
