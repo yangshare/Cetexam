@@ -16,13 +16,14 @@ import com.cet.pojo.Exam;
 import com.cet.pojo.Examinee;
 import com.cet.pojo.Needmarking;
 import com.cet.service.ObjectService;
+import com.cet.tool.MailSend;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class ExamineeAction extends ActionSupport {
 
 	/**
-	 * 
+	 * 考生类
 	 */
 	private static final long serialVersionUID = 1L;
 
@@ -42,6 +43,8 @@ public class ExamineeAction extends ActionSupport {
 	private Double translategrade;
 	private Double totalgrade;
 	private String email;
+
+	private String newpassword;
 
 	private String message;// 前台提示信息
 	private List<Exam> examList;// 反应到前台
@@ -108,6 +111,40 @@ public class ExamineeAction extends ActionSupport {
 		}
 
 		return "realindex";
+	}
+
+	// 修改密码
+	public String updatePass() {
+		Examinee examinee = (Examinee) ServletActionContext.getRequest()
+				.getSession().getAttribute("Examinee");
+		if (examinee != null && examinee.getPassword().equals(password)) {
+			examinee.setPassword(newpassword);
+			objectService.update(examinee);
+			message = "OK，修改成功";
+		} else
+			message = "ERROR，原密码不正确";
+		return "updatepass";
+	}
+
+	// 忘记密码
+	public String forgetPass() {
+		System.out.println(candidate);
+		List<?> list = objectService.getObjectByfield("Examinee", "candidate",
+				candidate);
+		System.out.println(list.size());
+		Examinee examinee = list.size() > 0 ? (Examinee) list.get(0) : null;
+		if (examinee != null) {
+			String message = examinee.getName()
+					+ "您好，您正在进行找回密码操作，若非本人操作，请修改密码！您的原登录密码为"
+					+ examinee.getPassword() + "，请注意保存您的密码。";
+			if (MailSend.SendMail("smtp.qq.com", "587", examinee.getEmail(),
+					"1907472272@qq.com", "找回密码", message))
+				message = "OK，已发送邮件，请注意查收";
+			else
+				message = "ERROR，发送邮件失败";
+		} else
+			message = "ERROR，账号不正确";
+		return "login_false";
 	}
 
 	/**
@@ -279,5 +316,13 @@ public class ExamineeAction extends ActionSupport {
 
 	public void setNeedmarkingList(List<Needmarking> needmarkingList) {
 		this.needmarkingList = needmarkingList;
+	}
+
+	public void setNewpassword(String newpassword) {
+		this.newpassword = newpassword;
+	}
+
+	public String getNewpassword() {
+		return newpassword;
 	}
 }

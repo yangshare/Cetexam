@@ -11,7 +11,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>删除考生信息</title>
+    <title>删除考试场次信息</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -50,7 +50,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body bgcolor="#f7f8f7">
   	<div class="div">
   	<hr class="hr"/>
-  	<h3><font color="#6110c5" style="padding-left: 10px;">删除考生信息</font></h3>
+  	<h3><font color="#6110c5" style="padding-left: 10px;">删除考试信息</font></h3>
   	<hr/>
   	</div>
     <table width="100%">

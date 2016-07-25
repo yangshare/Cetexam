@@ -7,7 +7,7 @@ package com.cet.pojo;
 public class Needmarking implements java.io.Serializable {
 
 	/**
-	 * 
+	 * 评分
 	 */
 	private static final long serialVersionUID = 1L;
 	// Fields
@@ -18,11 +18,11 @@ public class Needmarking implements java.io.Serializable {
 	private String translateAnswer;
 	private String status;
 	private String time;
-	private Double writinggrade;
-	private Double listeninggrade;
-	private Double readinggrade;
-	private Double translategrade;
-	private Double totalgrade;
+	private float writinggrade;
+	private float listeninggrade;
+	private float readinggrade;
+	private float translategrade;
+	private float totalgrade;
 
 	// Constructors
 	/** default constructor */
@@ -86,43 +86,43 @@ public class Needmarking implements java.io.Serializable {
 		this.time = time;
 	}
 
-	public Double getWritinggrade() {
+	public float getWritinggrade() {
 		return writinggrade;
 	}
 
-	public void setWritinggrade(Double writinggrade) {
+	public void setWritinggrade(float writinggrade) {
 		this.writinggrade = writinggrade;
 	}
 
-	public Double getListeninggrade() {
+	public float getListeninggrade() {
 		return listeninggrade;
 	}
 
-	public void setListeninggrade(Double listeninggrade) {
+	public void setListeninggrade(float listeninggrade) {
 		this.listeninggrade = listeninggrade;
 	}
 
-	public Double getReadinggrade() {
+	public float getReadinggrade() {
 		return readinggrade;
 	}
 
-	public void setReadinggrade(Double readinggrade) {
+	public void setReadinggrade(float readinggrade) {
 		this.readinggrade = readinggrade;
 	}
 
-	public Double getTranslategrade() {
+	public float getTranslategrade() {
 		return translategrade;
 	}
 
-	public void setTranslategrade(Double translategrade) {
+	public void setTranslategrade(float translategrade) {
 		this.translategrade = translategrade;
 	}
 
-	public Double getTotalgrade() {
+	public float getTotalgrade() {
 		return totalgrade;
 	}
 
-	public void setTotalgrade(Double totalgrade) {
+	public void setTotalgrade(float totalgrade) {
 		this.totalgrade = totalgrade;
 	}
 

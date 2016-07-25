@@ -6,13 +6,12 @@
     <class name="com.cet.pojo.BaseLongreading" table="base_longreading" catalog="cetexam">
         <id name="id" type="java.lang.Integer">
             <column name="id" />
-            <generator class="native" />
         </id>
         <property name="essay" type="java.lang.String">
             <column name="essay" length="65535" not-null="true" />
         </property>
-        <property name="option" type="java.lang.String">
-            <column name="option" length="65535" not-null="true" />
+        <property name="options" type="java.lang.String">
+            <column name="options" length="65535" not-null="true" />
         </property>
         <property name="answer" type="java.lang.String">
             <column name="answer" length="30" not-null="true" />

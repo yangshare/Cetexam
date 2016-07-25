@@ -30,22 +30,27 @@
 	<!-- 配置上传文件的最大值 -->
 	<constant name="struts.multipart.maxSize" value="41943040" />
 
-	<package name="cetexam"  extends="struts-default">
+	<package name="cetexam" extends="struts-default">
 
 		<!-- 试题类 -->
 		<action name="Exam_*" class="com.cet.action.ExamAction" method="{1}">
-			<result name="success">/index.jsp</result>
-			<result name="error">/examInsert.jsp</result>
+			<result name="execute">/WEB-INF/page/admin/examsList.jsp</result>
+			<result name="gotoAdd">/WEB-INF/page/admin/addExam.jsp</result>
+			<result name="gotoUpdate">/WEB-INF/page/admin/updateExam.jsp</result>
+			<result name="success">/WEB-INF/page/admin/examsList.jsp</result>
+			<result name="updateSuccess">/WEB-INF/page/admin/examsList.jsp</result>
+			<result name="deleteSuccess">/WEB-INF/page/admin/examsList.jsp</result>
 		</action>
 
-		<!-- 考生类 -->
-		<action name="Examinee_*" class="com.cet.action.ExamineeAction"
-			method="{1}">
-			<result name="login_false">/login.jsp</result>
-			<result name="index" type="chain">Examinee_toIndex</result>
-			<result name="showgrade">/showGrade.jsp</result>
-			<result name="realindex">/index.jsp</result>
-		</action>
+		 <!-- 考生类 -->
+	    <action name="Examinee_*" class="com.cet.action.ExamineeAction" method="{1}">
+            <result name="login_false">/login.jsp</result>
+            <result name="index" type="chain">Examinee_toIndex</result>
+            <result name="showgrade">/showGrade.jsp</result>
+            <result name="realindex">/index.jsp</result>
+            <result name="updatepass">/updatePass.jsp</result>
+        </action>
+
 
 		<!-- 考试类 -->
 		<action name="Test_*" class="com.cet.action.TestAction" method="{1}">
@@ -60,38 +65,6 @@
 			START 老杨添加的action
 			*********************************************************************************
 		-->
-
-		<!-- 试题页面 -->
-		<action name="test_*" class="com.cet.action.TestAction_partI"
-			method="{1}">
-			<result name="getpartI">/WEB-INF/page/test/partI.jsp</result>
-			<!--
-				test_getpartII
-			-->
-			<result name="getpartII">/WEB-INF/page/test/partII.jsp</result>
-			<result name="back" type="chain">examinee_getexaminee</result>
-		</action>
-
-		<!-- 修改试题 -->
-		<action name="updateTest-*" class="com.cet.action.UpdateTestAction"
-			method="{1}">
-			<result name="execute">/WEB-INF/page/admin/testlist.jsp</result>
-			<result name="getTest">/WEB-INF/page/admin/testdetail.jsp</result>
-			<result name="updateAllTests">/WEB-INF/page/admin/testUpdateList.jsp</result>
-			<result name="deleteAllTests">/WEB-INF/page/admin/testDeleteList.jsp</result>
-			<result name="updateTest">/WEB-INF/page/admin/updateTest.jsp</result>
-			<result name="addTest">/WEB-INF/page/admin/addTest.jsp</result>
-			<result name="delete" type="chain">teacherAction-linkDeleteTeacher
-			</result>
-			<result name="update" type="chain">teacherAction-linkUpdateTeacherPage
-			</result>
-			<result name="successDel" type="chain">updateTest-detectAllTests
-			</result>
-			<result name="successAdd" type="chain">updateTest-addTest</result>
-			<result name="success" type="chain">updateTest-updateTest</result>
-			<interceptor-ref name="fileUpload" />
-			<interceptor-ref name="defaultStack" />
-		</action>
 
 		<!-- 考生信息确认 -->
 		<action name="examinee_*" class="com.cet.action.ExamineeAction"
@@ -131,7 +104,6 @@
 			</result>
 			<result type="chain">updatepwd_currectpassword</result>
 		</action>
-		<!-- wu~~ -->
 
 		<!-- 后台登录 -->
 		<action name="loginAction" class="com.cet.action.LoginAction">
@@ -139,7 +111,6 @@
 			<result name="admin">/admin.jsp</result>
 			<result name="fail" type="dispatcher">/adminLogin.jsp</result>
 		</action>
-		<!-- 后台登录 -->
 
 		<!-- 教师对象的增删改 -->
 		<action name="teacherAction-*" class="com.cet.action.TeacherAction"
@@ -175,18 +146,40 @@
 			</result>
 			<result name="update" type="chain">examineeAction-linkUpdateExamineePage
 			</result>
-			<result name="add" type="chain">examineeAction-linkUpdateExamineePage</result>
+			<result name="add" type="chain">examineeAction-linkUpdateExamineePage
+			</result>
 			<result name="getExamineeByCandidateNo">/WEB-INF/page/admin/updateExaminee.jsp</result>
 			<interceptor-ref name="fileUpload" />
 			<interceptor-ref name="defaultStack" />
 		</action>
 
-		<!-- 考试对象的增删改 -->
-		<action name="examAction-*" class="com.cet.action.TestAction"
+		<!-- 试题对象的增删改 -->
+		<action name="testAction-*" class="com.cet.action.BackTestAction"
 			method="{1}">
-			<result name="success">/WEB-INF/page/admin/addExams.jsp</result>
+			<result name="execute">/WEB-INF/page/admin/testsList.jsp</result>
+			<result name="getTest">/WEB-INF/page/admin/testdetail.jsp</result>
+			<result name="updateTestSuccess">/WEB-INF/page/admin/testsList.jsp</result>
+			<result name="detectTestSuccess">/WEB-INF/page/admin/testsList.jsp</result>
+			<result name="updateTest">/WEB-INF/page/admin/updateTest.jsp</result>
+			<result name="addTest">/WEB-INF/page/admin/addTest.jsp</result>
+			
+			
+			<result name="successAdd" type="chain">testAction-execute</result>
+			<result name="successDel" type="chain">testAction-detectTestSuccess
+			</result>
+			<result name="successUpdate" type="chain">testAction-updateTestSuccess
+			</result>
+			<result name="success" type="chain">testAction-updateTest</result>
+			<interceptor-ref name="fileUpload" />
+			<interceptor-ref name="defaultStack" />
+		</action>
+		
+		<!-- 考试场次对象的增删改 -->
+		<action name="examAction-*" class="com.cet.action.BackExamAction"
+			method="{1}">
+			<result name="success">/WEB-INF/page/admin/addExam.jsp</result>
 			<result name="updateExamPage">/WEB-INF/page/admin/updateExamPage.jsp</result>
-			<result name="deleteExam">/WEB-INF/page/admin/deleteExam.jsp</result>
+			<result name="deleteExam">/WEB-INF/page/admin/deleteExamPage.jsp</result>
 			<result name="execute">/WEB-INF/page/admin/examsList.jsp</result>
 			<result name="delete" type="chain">examAction-linkDeleteExam</result>
 			<result name="update" type="chain">examAction-linkUpdateExamPage

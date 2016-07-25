@@ -54,37 +54,46 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  	<tr align="center" style="font-weight: bold;" bgcolor="#dcedf7">
 	  		<td>考试名称</td>
 	  		<td>考试时间</td>
-	  		<td>考号区间</td>
+	  		<td>考号开始</td>
+	  		<td>考号结束</td>
 	  		<td>监考教师</td>
 	  		<td>考号地点</td>
+	  		<td>试题难度</td>
 	  		<td>试题名称</td>
 	  		
 	  	</tr>
-    <s:iterator value="examlist">
+    <s:iterator value="examList">
     	<tr align="center" class="tr">
-  			<td>${testname}</td>
-    		<td><s:property value="time"/></td>
-  			<td><s:property value="numarea"/></td>
-  			<td><s:property value="testteachers"/></td>
-  			<td><s:property value="position"/></td>
-  			<td>${testid.title}</td>
+  			<td>${examname}</td>
+    		<td>${time}</td>
+  			<td>${beginno}</td>
+  			<td>${endno}</td>
+  			<td>${teacher}</td>
+  			<td>${position}</td>
+  			<td>${difficulty}</td>
+  			<td>${test.name}</td>
+  			<td>
+	  			<a href="<%=request.getContextPath() %>/cet4/Exam_gotoUpdate?id=${id}">修改</a>
+	  			<br/>
+	  			<a href="<%=request.getContextPath() %>/cet4/Exam_delete?id=${id}">删除</a>
+  			</td>
   		</tr>
     </s:iterator>
     </table>
    <table width="100%" align="center" cellspacing="0">
     	<tr align="center" bgcolor="#dcedf7">
     		<td>
-			    <a href="<%=request.getContextPath() %>/cet4/examAction?curPage=1">【首页】</a>
+			    <a href="<%=request.getContextPath() %>/cet4/Exam?curPage=1">【首页】</a>
 			    <c:if test="${curPage>1}">
-			    	<a href="<%=request.getContextPath() %>/cet4/examAction?curPage=${curPage-1}">【上一页】</a>
+			    	<a href="<%=request.getContextPath() %>/cet4/Exam?curPage=${curPage-1}">【上一页】</a>
 			    </c:if>
 			    <c:if test="${curPage<maxPage}">
-			    	<a href="<%=request.getContextPath() %>/cet4/examAction?curPage=${curPage+1}">【下一页】</a>
+			    	<a href="<%=request.getContextPath() %>/cet4/Exam?curPage=${curPage+1}">【下一页】</a>
 			    </c:if>
-			    <a href="<%=request.getContextPath() %>/cet4/examAction?curPage=${maxPage}">【尾页】</a>&nbsp;&nbsp;&nbsp;&nbsp;
+			    <a href="<%=request.getContextPath() %>/cet4/Exam?curPage=${maxPage}">【尾页】</a>&nbsp;&nbsp;&nbsp;&nbsp;
     		</td>
     		<td style="padding-top: 15px;">
-			    <form action="<%=request.getContextPath() %>/cet4/examAction" name="page" onsubmit="return check()">   
+			    <form action="<%=request.getContextPath() %>/cet4/Exam" name="page" onsubmit="return check()">   
 				           跳转到<input name="curPage" size="1" value="1"/>页
 				    <input type="submit" value="跳转"/>
 			    </form> 

@@ -31,13 +31,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		  return false;
 		  }
 		}
+		function forget()
+		{
+		  document.forms[0].action="Examinee_forgetPass";
+		  document.forms[0].submit();
+		}
 	</script>
 
   </head>
   
   <body>
-    ${message }
     <center>
+    ${message }
     <br/><br/><br/><br/><br/><br/>
     <h1>考生登录</h1>
         <br/><br/><br/><br/>
@@ -48,7 +53,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			    <input value="注册 " type="button" onclick="window.location.href='';" />&nbsp;&nbsp;
 			    <input value="重置" type="button" onclick="this.form.reset();return false;"/> <br/><br/><br/><br/>
 		</form>
-		<a href="adminLogin.jsp">点击进入后台</a><br/><br/>
+		<a href="javascript:forget()">忘记密码？点我发送密码到您的邮箱</a><br/><br/>&nbsp;&nbsp;&nbsp;<a href="adminLogin.jsp">点击进入后台</a><br/><br/>
 		
 		<div>
 		

@@ -1,14 +1,11 @@
 package com.cet.action;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
 
 import org.apache.struts2.ServletActionContext;
 
-import com.cet.pojo.Examinee;
 import com.cet.pojo.Needmarking;
 import com.cet.service.ObjectService;
 

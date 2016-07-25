@@ -69,30 +69,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    </div>
 	    <h3>试题管理</h3>
 	    <div>
-	    
-	    <script type="text/javascript">
-	      function sendtestname()
-	      {
-	    
-	        var title = window.prompt("输入试题名称:");
-	        if(title)
-	        window.parent.showAdmin.location.href="/Cet4System/cet4/updateTest-insertTestName?testname="+title;
-	        else
-	         return;
-	      }
-	    
-	    </script>
-	    	<a href="<%=request.getContextPath() %>/cet4/updateTest" target="showAdmin">●查询试题</a>
-	        <a target="showAdmin" onclick="sendtestname();">●新增试题</a>
-	    	<a href="<%=request.getContextPath() %>/cet4/updateTest-updateAllTests" target="showAdmin">●修改试题</a>
-	    	<a href="<%=request.getContextPath() %>/cet4/updateTest-detectAllTests" target="showAdmin">●删除试题</a>
+	    	<a href="<%=request.getContextPath() %>/cet4/testAction" target="showAdmin">●管理试题</a>
+	        <a href="<%=request.getContextPath() %>/cet4/testAction-gotoAdd" target="showAdmin">●新增试题</a>
 	    </div>
 	    <h3>考试管理</h3>
 	    <div>
-	     	<a href="<%=request.getContextPath() %>/cet4/examAction?curPage=1" target="showAdmin">●查询考试</a>
-	        <a href="<%=request.getContextPath() %>/cet4/examAction-link" target="showAdmin">●添加考试</a>
-	        <a href="<%=request.getContextPath() %>/cet4/examAction-linkUpdateExamPage?curPage=1" target="showAdmin">●修改考试</a>
-	        <a href="<%=request.getContextPath() %>/cet4/examAction-linkDeleteExam?curPage=1" target="showAdmin">●删除考试</a>
+	     	<a href="<%=request.getContextPath() %>/cet4/Exam?curPage=1" target="showAdmin">●管理考试</a>
+	        <a href="<%=request.getContextPath() %>/cet4/Exam_gotoAdd" target="showAdmin">●添加考试</a>
 	    </div>
 	</div>
 	<div id="na">

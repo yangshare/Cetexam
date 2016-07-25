@@ -7,7 +7,7 @@ package com.cet.pojo;
 public class Exam implements java.io.Serializable {
 
 	/**
-	 * 
+	 * 考试
 	 */
 	private static final long serialVersionUID = 1L;
 	// Fields

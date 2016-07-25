@@ -13,7 +13,7 @@ public class BaseLongreading implements java.io.Serializable {
 	// Fields
 	private Integer id;
 	private String essay;
-	private String option;
+	private String options;
 	private String answer;
 	private Float difficulty;
 	private Float access;
@@ -41,12 +41,12 @@ public class BaseLongreading implements java.io.Serializable {
 		this.essay = essay;
 	}
 
-	public String getOption() {
-		return this.option;
+	public String getOptions() {
+		return this.options;
 	}
 
-	public void setOption(String option) {
-		this.option = option;
+	public void setOptions(String options) {
+		this.options = options;
 	}
 
 	public String getAnswer() {

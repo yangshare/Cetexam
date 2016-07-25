@@ -8,10 +8,9 @@
     <class name="com.cet.pojo.BaseTranslate" table="base_translate" catalog="cetexam">
         <id name="id" type="java.lang.Integer">
             <column name="id" />
-            <generator class="native" />
         </id>
         <property name="essay" type="java.lang.String">
-            <column name="essay" length="65535" not-null="true" />
+            <column name="essay" length="65535"  />
         </property>
         <property name="difficulty" type="java.lang.Float">
             <column name="difficulty" precision="4" scale="3" />

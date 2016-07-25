@@ -13,7 +13,7 @@ import com.cet.tool.Algorithm;
 public class Test implements java.io.Serializable {
 
 	/**
-	 * 
+	 * 试题
 	 */
 	private static final long serialVersionUID = 1L;
 	// Fields
@@ -189,8 +189,9 @@ public class Test implements java.io.Serializable {
 	public Object getRandomObject(Class<?> clas, String table) {
 		ObjectService objectService = Algorithm.objectService;
 		Random random = new Random();
-		return objectService.getObjectById(clas, random.nextInt(objectService
+		Object obj=objectService.getObjectById(clas, random.nextInt(objectService
 				.getMaxID(table)) + 1);
+		return obj;
 	}
 
 	// Property accessors

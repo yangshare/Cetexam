@@ -6,7 +6,6 @@
     <class name="com.cet.pojo.BaseListening" table="base_listening" catalog="cetexam">
         <id name="id" type="java.lang.Integer">
             <column name="id" />
-            <generator class="native" />
         </id>
         <property name="listeningname" type="java.lang.String">
             <column name="listeningname" length="100" not-null="true" />

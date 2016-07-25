@@ -49,6 +49,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
      <s:submit disabled="true"  value="开始答题" id="sub" type="button"/>
      <input type="button" onclick="window.location.href='<%=request.getContextPath() %>/Examinee_showGrade?candidate=${candidate}'" value="查看成绩"/>
      <input type="button" onclick="window.location.href='<%=request.getContextPath() %>/Test_pagingExercise?curPage=1'" value="练习系统"/>
+     <input type="button" onclick="window.location.href='<%=request.getContextPath() %>/updatePass.jsp'" value="修改密码"/>
+     
     </s:iterator></center>
    </s:form> 
     <script type="text/javascript">
@@ -61,8 +63,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         alert("开始考试，请准备");
         document.getElementById("testid").value = testid;
         document.getElementById("sub").disabled = false;
-     },(date-now)*1000);  
- 
+        },(date-now)*1000);  
      }
    </script>
    

@@ -26,7 +26,7 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class TestAction extends ActionSupport {
 	/**
-	 * 
+	 * 试题
 	 */
 	private static final long serialVersionUID = 1L;
 
@@ -95,62 +95,71 @@ public class TestAction extends ActionSupport {
 		Test test = (Test) ServletActionContext.getRequest().getSession()
 				.getAttribute("Test");
 
-		double listeningGrade = 0, readingGrade = 0;
+		float listeningGrade = 0, readingGrade = 0;
+		float wordGrade = 0, longGrade = 0, careGrade1 = 0, careGrade2 = 0;
 		// 计算听力成绩
-		String listen = listen1 + listen12 + listen3 + listen4 + listen5
+		String listen = listen1 + listen2 + listen3 + listen4 + listen5
 				+ listen6 + listen7 + listen8 + listen9 + listen10 + listen11
 				+ listen12 + listen13 + listen14 + listen15 + listen16
 				+ listen17 + listen18 + listen19 + listen20 + listen21
 				+ listen22 + listen23 + listen24 + listen25;
+		listen = listen.replace("null", "0");
 		int i = 0;
 		for (Iterator<SeedListening> iterator1 = test.getBaseListening()
 				.getSeedListenings().iterator(); iterator1.hasNext(); i++) {
 			SeedListening seed = iterator1.next();
 			if (i < 15) {
 				if (String.valueOf(listen.charAt(i)).equals(seed.getAnswer()))
-					listeningGrade += 7.1;
+					listeningGrade += 7.1f;
 			} else {
 				if (String.valueOf(listen.charAt(i)).equals(seed.getAnswer()))
-					listeningGrade += 14.2;
+					listeningGrade += 14.2f;
 			}
-
 		}
 		// 计算阅读成绩
 		String baseWordunderstandAnswer = test.getBaseWordunderstand()
 				.getAnswer();
-		for (i = 0; i < 10; i++) {
+		for (i = 0; i < wordunderstandAnswer.length(); i++) {
 			if (String.valueOf(wordunderstandAnswer.charAt(i)).equals(
 					String.valueOf(baseWordunderstandAnswer.charAt(i)))) {
-				readingGrade += 3.6;
+				readingGrade += 3.6f;
 			}
 		}
+		wordGrade = readingGrade;// 词汇阅读成绩（总分36）
 		String baseLongreadingAnswer = test.getBaseLongreading().getAnswer();
-		for (i = 0; i < 10; i++) {
+		System.out.println("长阅读" + lognreadingAnswer);
+		for (i = 0; i < lognreadingAnswer.length(); i++) {
 			if (String.valueOf(lognreadingAnswer.charAt(i)).equals(
 					String.valueOf(baseLongreadingAnswer.charAt(i)))) {
-				readingGrade += 7.1;
+				readingGrade += 7.1f;
 			}
 		}
+		longGrade = readingGrade - wordGrade;// 长阅读成绩（总分71）
 		String careread1 = carereading46 + carereading47 + carereading48
 				+ carereading49 + carereading50;
 		String careread2 = carereading51 + carereading52 + carereading53
 				+ carereading54 + carereading55;
+		careread1 = careread1.replace("null", "0");
+		careread2 = careread2.replace("null", "0");
 		i = 0;
 		for (Iterator<SeedCarereading> iterator1 = test.getBaseCarereading1()
 				.getSeedCarereadings().iterator(); iterator1.hasNext(); i++) {
 			SeedCarereading seed = iterator1.next();
 			if (String.valueOf(careread1.charAt(i)).equals(seed.getAnswer())) {
-				readingGrade += 7.1;
+				readingGrade += 14.2f;
 			}
 		}
+		careGrade1 = readingGrade - longGrade - wordGrade;// 仔细阅读1成绩（总分71）
 		i = 0;
 		for (Iterator<SeedCarereading> iterator1 = test.getBaseCarereading2()
 				.getSeedCarereadings().iterator(); iterator1.hasNext(); i++) {
 			SeedCarereading seed = iterator1.next();
 			if (String.valueOf(careread2.charAt(i)).equals(seed.getAnswer())) {
-				readingGrade += 7.1;
+				readingGrade += 14.2f;
 			}
 		}
+		careGrade2 = readingGrade - longGrade - wordGrade - careGrade1;// 仔细阅读2成绩（总分71）
+
 		Examinee examinee = (Examinee) ServletActionContext.getRequest()
 				.getSession().getAttribute("Examinee");
 		// 为needmarking设置值
@@ -165,6 +174,43 @@ public class TestAction extends ActionSupport {
 		needmarking.setListeninggrade(listeningGrade);
 		needmarking.setReadinggrade(readingGrade);
 		objectService.save(needmarking);
+
+		// 重设题型难度
+		BaseListening baseListening = test.getBaseListening();
+		baseListening.setAccess(baseListening.getAccess() + listeningGrade
+				/ 248.5f);
+		baseListening.setDifficulty(baseListening.getAccess()
+				/ baseListening.getTotal());
+
+		BaseWordunderstand baseWordunderstand = test.getBaseWordunderstand();
+		baseWordunderstand.setAccess(baseWordunderstand.getAccess() + wordGrade
+				/ 36f);
+		baseWordunderstand.setDifficulty(baseWordunderstand.getAccess()
+				/ baseWordunderstand.getTotal());
+
+		BaseLongreading baseLongreading = test.getBaseLongreading();
+		baseLongreading
+				.setAccess(baseLongreading.getAccess() + longGrade / 71f);
+		baseLongreading.setDifficulty(baseLongreading.getAccess()
+				/ baseLongreading.getTotal());
+
+		BaseCarereading baseCarereading1 = test.getBaseCarereading1();
+		baseCarereading1.setAccess(baseCarereading1.getAccess() + careGrade1
+				/ 71f);
+		baseCarereading1.setDifficulty(baseCarereading1.getAccess()
+				/ baseCarereading1.getTotal());
+
+		BaseCarereading baseCarereading2 = test.getBaseCarereading2();
+		baseCarereading2.setAccess(baseCarereading2.getAccess() + careGrade2
+				/ 71f);
+		baseCarereading2.setDifficulty(baseCarereading2.getAccess()
+				/ baseCarereading2.getTotal());
+
+		objectService.update(baseListening);
+		objectService.update(baseWordunderstand);
+		objectService.update(baseLongreading);
+		objectService.update(baseCarereading1);
+		objectService.update(baseCarereading2);
 
 		if (ServletActionContext.getRequest().getSession().getAttribute("mode")
 				.equals("Testing"))
@@ -285,7 +331,10 @@ public class TestAction extends ActionSupport {
 	}
 
 	public void setCarereading52(String carereading52) {
-		this.carereading52 = carereading52;
+		if (carereading52 == null)
+			carereading52 = "0";
+		else
+			this.carereading52 = carereading52;
 	}
 
 	public String getCarereading53() {
@@ -293,7 +342,10 @@ public class TestAction extends ActionSupport {
 	}
 
 	public void setCarereading53(String carereading53) {
-		this.carereading53 = carereading53;
+		if (carereading53 == null)
+			carereading53 = "0";
+		else
+			this.carereading53 = carereading53;
 	}
 
 	public String getCarereading54() {
@@ -310,14 +362,6 @@ public class TestAction extends ActionSupport {
 
 	public void setCarereading55(String carereading55) {
 		this.carereading55 = carereading55;
-	}
-
-	public String getTranslateAnswer() {
-		return translateAnswer;
-	}
-
-	public void setTranslateAnswer(String translateAnswer) {
-		this.translateAnswer = translateAnswer;
 	}
 
 	public String getListen1() {
@@ -656,7 +700,10 @@ public class TestAction extends ActionSupport {
 	}
 
 	public void setWritingAnswer(String writingAnswer) {
-		this.writingAnswer = writingAnswer;
+		if (writingAnswer == null)
+			this.writingAnswer = "";
+		else
+			this.writingAnswer = writingAnswer;
 	}
 
 	public String getWritingAnswer() {
@@ -664,10 +711,10 @@ public class TestAction extends ActionSupport {
 	}
 
 	public void setWordunderstandAnswer(String wordunderstandAnswer) {
-		while (wordunderstandAnswer.length() < 10) {
-			wordunderstandAnswer += "0";
-		}
-		this.wordunderstandAnswer = wordunderstandAnswer;
+		if (wordunderstandAnswer == null)
+			this.wordunderstandAnswer = "";
+		else
+			this.wordunderstandAnswer = wordunderstandAnswer;
 	}
 
 	public String getWordunderstandAnswer() {
@@ -675,14 +722,24 @@ public class TestAction extends ActionSupport {
 	}
 
 	public void setLognreadingAnswer(String lognreadingAnswer) {
-		while (lognreadingAnswer.length() < 10) {
-			lognreadingAnswer += "0";
-		}
-		this.lognreadingAnswer = lognreadingAnswer;
+		if (lognreadingAnswer == null)
+			this.lognreadingAnswer = "";
+		else
+			this.lognreadingAnswer = lognreadingAnswer;
 	}
 
 	public String getLognreadingAnswer() {
 		return lognreadingAnswer;
 	}
 
+	public void setTranslateAnswer(String translateAnswer) {
+		if (translateAnswer == null)
+			this.translateAnswer = "";
+		else
+			this.translateAnswer = translateAnswer;
+	}
+
+	public String getTranslateAnswer() {
+		return translateAnswer;
+	}
 }

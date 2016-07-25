@@ -1,5 +1,7 @@
 package com.cet.action;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import com.cet.pojo.Exam;
@@ -11,7 +13,7 @@ import com.opensymphony.xwork2.ActionSupport;
 public class ExamAction extends ActionSupport {
 
 	/**
-	 * 
+	 * 考试场次
 	 */
 	private static final long serialVersionUID = 1L;
 
@@ -30,15 +32,74 @@ public class ExamAction extends ActionSupport {
 	private float difficulty;
 
 	private String message;// 用于JSP页面显示提示信息
+	private Exam exam;
+	private List<Exam> examList;
+	
+	// paging
+	private int curPage = 1; // 当前显示的页面
+	private int maxPage; // 总的页面数
+	private int perPageRow = 6; // 每页显示的记录数
+	
+	// action默认方法
+	@SuppressWarnings("unchecked")
+	public String execute() {
+		this.examList = objectService.page("Exam", (curPage - 1) * perPageRow,
+				perPageRow);
+
+		return "execute";
+	}
+	
+	/**
+	 * 去往修改页面
+	 * @return
+	 */
+	public String gotoUpdate(){
+		exam=(Exam)objectService.getObjectById(Exam.class, id);
+		return "gotoUpdate";
+	}
+	/**
+	 * 功能：修改一堂考试
+	 * 
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public String update() {
+
+		exam=(Exam)objectService.getObjectById(Exam.class, id);
+		exam.setExamname(examname);
+		exam.setTime(time);
+		exam.setBeginno(beginno);
+		exam.setEndno(endno);
+		exam.setTeacher(teacher);
+		exam.setPosition(position);
+
+		exam.setDifficulty(difficulty);
+		objectService.update(exam);
+		
+		//跳转到考试列表
+		curPage=1;
+		this.examList = objectService.page("Exam", (curPage - 1) * perPageRow,
+				perPageRow);
+		return "updateSuccess";
+	}
+	
+	/**
+	 * 去往添加页面
+	 * @return
+	 */
+	public String gotoAdd(){
+		return "gotoAdd";
+	}
 
 	/**
 	 * 功能：添加一堂考试（并自动生成了一套试题）
 	 * 
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
 	public String insert() {
 
-		Exam exam = new Exam();
+		exam = new Exam();
 		id = objectService.getMaxID("Exam") + 1;
 		exam.setId(id);
 		exam.setExamname(examname);
@@ -56,6 +117,7 @@ public class ExamAction extends ActionSupport {
 		}
 		test.setId(objectService.getMaxID("Test") + 1);
 		test.setName(examname);
+		
 		objectService.save(test);
 
 		exam.setDifficulty(test.getDifficulty());
@@ -66,7 +128,29 @@ public class ExamAction extends ActionSupport {
 			message = "<script>alert('Error,添加考试失败');</script>";
 		}
 
+		//跳转到考试列表
+		curPage=1;
+		this.examList = objectService.page("Exam", (curPage - 1) * perPageRow,
+				perPageRow);
+		
 		return SUCCESS;
+	}
+	
+	/**
+	 * 删除一堂考试
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public String delete(){
+		exam=(Exam)objectService.getObjectById(Exam.class, id);
+		objectService.delete(exam);
+		
+		//跳转到考试列表
+		curPage=1;
+		this.examList = objectService.page("Exam", (curPage - 1) * perPageRow,
+				perPageRow);
+		
+		return "deleteSuccess";
 	}
 
 	// Property accessors
@@ -148,5 +232,53 @@ public class ExamAction extends ActionSupport {
 
 	public float getDifficulty() {
 		return difficulty;
+	}
+
+	/**
+	 * @param examList the examList to set
+	 */
+	public void setExamList(List<Exam> examList) {
+		this.examList = examList;
+	}
+
+	/**
+	 * @return the examList
+	 */
+	public List<Exam> getExamList() {
+		return examList;
+	}
+
+	/**
+	 * @param maxPage the maxPage to set
+	 */
+	public void setMaxPage(int maxPage) {
+		this.maxPage = maxPage;
+	}
+
+	/**
+	 * @return the maxPage
+	 */
+	public int getMaxPage() {
+		int maxRow = objectService.getAllObjects("Test").size();
+		if (maxRow % perPageRow == 0) {
+			maxPage = maxRow / perPageRow;
+		} else {
+			maxPage = maxRow / perPageRow + 1;
+		}
+		return maxPage;
+	}
+
+	/**
+	 * @param exam the exam to set
+	 */
+	public void setExam(Exam exam) {
+		this.exam = exam;
+	}
+
+	/**
+	 * @return the exam
+	 */
+	public Exam getExam() {
+		return exam;
 	}
 }

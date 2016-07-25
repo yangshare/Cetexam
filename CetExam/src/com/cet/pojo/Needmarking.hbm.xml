@@ -26,19 +26,19 @@
         <property name="time" type="java.lang.String">
             <column name="time" length="20" />
         </property>
-        <property name="writinggrade" type="java.lang.Double">
+        <property name="writinggrade" type="java.lang.Float">
             <column name="writinggrade" precision="4" scale="1" />
         </property>
-        <property name="listeninggrade" type="java.lang.Double">
+        <property name="listeninggrade" type="java.lang.Float">
             <column name="listeninggrade" precision="4" scale="1" />
         </property>
-        <property name="readinggrade" type="java.lang.Double">
+        <property name="readinggrade" type="java.lang.Float">
             <column name="readinggrade" precision="4" scale="1" />
         </property>
-        <property name="translategrade" type="java.lang.Double">
+        <property name="translategrade" type="java.lang.Float">
             <column name="translategrade" precision="4" scale="1" />
         </property>
-        <property name="totalgrade" type="java.lang.Double">
+        <property name="totalgrade" type="java.lang.Float">
             <column name="totalgrade" precision="4" scale="1" />
         </property>
     </class>

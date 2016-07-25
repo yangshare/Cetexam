@@ -12,10 +12,7 @@ public class SeedListening implements java.io.Serializable {
 	private static final long serialVersionUID = 1L;
 	// Fields
 	private Integer id;
-	private String optionA;
-	private String optionB;
-	private String optionC;
-	private String optionD;
+	private String options;
 	private String answer;
 	private BaseListening baseListening;
 
@@ -41,37 +38,6 @@ public class SeedListening implements java.io.Serializable {
 		this.baseListening = baseListening;
 	}
 
-	public String getOptionA() {
-		return this.optionA;
-	}
-
-	public void setOptionA(String optionA) {
-		this.optionA = optionA;
-	}
-
-	public String getOptionB() {
-		return this.optionB;
-	}
-
-	public void setOptionB(String optionB) {
-		this.optionB = optionB;
-	}
-
-	public String getOptionC() {
-		return this.optionC;
-	}
-
-	public void setOptionC(String optionC) {
-		this.optionC = optionC;
-	}
-
-	public String getOptionD() {
-		return this.optionD;
-	}
-
-	public void setOptionD(String optionD) {
-		this.optionD = optionD;
-	}
 
 	public String getAnswer() {
 		return this.answer;
@@ -79,6 +45,20 @@ public class SeedListening implements java.io.Serializable {
 
 	public void setAnswer(String answer) {
 		this.answer = answer;
+	}
+
+	/**
+	 * @param options the options to set
+	 */
+	public void setOptions(String options) {
+		this.options = options;
+	}
+
+	/**
+	 * @return the options
+	 */
+	public String getOptions() {
+		return options;
 	}
 
 }

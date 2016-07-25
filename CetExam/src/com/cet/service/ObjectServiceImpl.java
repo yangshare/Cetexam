@@ -177,7 +177,7 @@ public class ObjectServiceImpl implements ObjectService {
 		if (table.equals("BaseCarereading")) {
 			for (int i = 0; i < list.size(); i++) {
 				if (i == list.size() - 1) {
-					area += ((Test) list.get(i)).getBaseCarereading1().getId();
+					area += ((Test) list.get(i)).getBaseCarereading1().getId()+ ",";
 					area += ((Test) list.get(i)).getBaseCarereading2().getId();
 					break;
 				}

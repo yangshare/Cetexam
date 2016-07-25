@@ -86,47 +86,38 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <br/><br/>
                 
                 <!-- 听力 -->
-				<b></>Part II Listening Comprehension (30minutes)</b>
+				<b>Part II Listening Comprehension (30minutes)</b>
 				<br><br>
 				<div id="listening"><input id="url" type="hidden" value="${baseListening.materialurl}"></div>
 				<s:iterator id="seed" value="baseListening.seedListenings">
-				  ${seed.optionA} </br></br>
-				  &nbsp;&nbsp;${seed.optionB} </br></br>
-				  &nbsp;&nbsp;${seed.optionC} </br></br>
-				  &nbsp;&nbsp;${seed.optionD} </br></br>
-				  &nbsp;&nbsp;选择答案:<s:radio list="#{'A':'A','B':'B','C':'C','D':'D'}" name="listen%{#seed.id%26}" ></s:radio> </br></br></br>
+				  ${seed.options} <br/><br/>
+				  &nbsp;&nbsp;选择答案:<s:radio list="#{'A':'A','B':'B','C':'C','D':'D'}" name="listen%{#seed.id%26}" ></s:radio> <br/><br/><br/>
 				</s:iterator>
 				
 				<!-- 词汇理解 -->
 				<b>Part III Reading Comprehension (40 minutes)</b>
 				<br><br>
 				${baseWordunderstand.essay}<br/> <br/>           
-				${baseWordunderstand.option}<br/><br/>            
+				${baseWordunderstand.options}<br/><br/>            
 				填入答案:<input type="text" name="wordunderstandAnswer"/><br><br>
 				
 				<!-- 长阅读 -->
 				${baseLongreading.essay}<br/><br/>
-				${baseLongreading.option}<br/><br/>
+				${baseLongreading.options}<br/><br/>
 				填入答案:<input type="text" name="lognreadingAnswer"/><br><br>
 				
 				<!-- 仔细阅读 -->
 				${baseCarereading1.essay}<br/><br/>
 				<s:iterator id="seed" value="baseCarereading1.seedCarereadings">
-				  ${seed.id%6+45}. ${seed.question} </br></br>
-				  &nbsp;&nbsp;${seed.optionA} </br></br>
-				  &nbsp;&nbsp;${seed.optionB} </br></br>
-				  &nbsp;&nbsp;${seed.optionC} </br></br>
-				  &nbsp;&nbsp;${seed.optionD} </br></br>
-				  &nbsp;&nbsp;选择答案:<s:radio list="#{'A':'A','B':'B','C':'C','D':'D'}" name="carereading%{#seed.id%6+45}" ></s:radio> </br></br></br>
+				  ${seed.question} <br/><br/>
+				  &nbsp;&nbsp;${seed.options} <br/><br/>
+				  &nbsp;&nbsp;选择答案:<s:radio list="#{'A':'A','B':'B','C':'C','D':'D'}" name="carereading%{#seed.id%6+45}" ></s:radio> <br/><br/><br/>
 				</s:iterator>
 				${baseCarereading2.essay}<br/><br/>
 				<s:iterator id="seed" value="baseCarereading2.seedCarereadings">
-				  ${seed.id%6+50}. ${seed.question} </br></br>
-				  &nbsp;&nbsp;${seed.optionA} </br></br>
-				  &nbsp;&nbsp;${seed.optionB} </br></br>
-				  &nbsp;&nbsp;${seed.optionC} </br></br>
-				  &nbsp;&nbsp;${seed.optionD} </br></br>
-				  &nbsp;&nbsp;选择答案:<s:radio list="#{'A':'A','B':'B','C':'C','D':'D'}" name="carereading%{#seed.id%6+50}" ></s:radio> </br></br></br>
+				  ${seed.question} <br/><br/>
+				  &nbsp;&nbsp;${seed.options} <br/><br/>
+				  &nbsp;&nbsp;选择答案:<s:radio list="#{'A':'A','B':'B','C':'C','D':'D'}" name="carereading%{#seed.id%6+50}" ></s:radio> <br/><br/><br/>
 				</s:iterator>
                 
                 <!-- 翻译 -->
